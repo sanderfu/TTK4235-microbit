@@ -27,6 +27,8 @@ int main(){
 	GPIO->PIN_CNF[26] = 0;
 
 	int sleep = 0;
+
+
 	while(1){
 
 		/* Check if button B is pressed;
@@ -34,16 +36,16 @@ int main(){
 
 		if(!(GPIO->IN & (1 << 26)))
 		{
-			for(int i = 4; i <= 15; i++)
+			for(int i = 13; i <= 15; i++)
 			{
-				GPIO -> OUTSET = (1 << i);
+				GPIO->OUT |= (1 << i);
 			}
 		}
 
 
 
-		/* Check if button A is pressed;
-		 * turn off LED matrix if it is. */
+		 /*Check if button A is pressed;
+		 * turn off LED matrix if it is.*/
 
 		if(!(GPIO->IN & (1<<17)))
 		{
