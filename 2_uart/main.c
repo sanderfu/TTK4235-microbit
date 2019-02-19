@@ -45,13 +45,12 @@ void ask_for_numbers() {
     int a;
     int b;    
     
-    iprintf("Please write a number: \n");
+    iprintf("Please write a number: \n\r");
     scanf(" %d", &a);
-    iprintf("\n");
-    iprintf("Please write another number: \n");
+    iprintf("Please write another number: \n\r");
     scanf("%d", &b);
     int product = a*b;
-    iprintf("%d * %d = %d\n", a,b,product);
+    iprintf("%d * %d = %d\n\r", a,b,product);
 }
 
 int main() {
