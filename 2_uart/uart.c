@@ -3,8 +3,8 @@
 #include "gpio.h"
 
 #define UART ((NRF_UART_REG*)0x40002000)
-#define RXD_PIN 24
-#define TXD_PIN 25
+#define RXD_PIN 25
+#define TXD_PIN 24
 
 
 typedef struct {
@@ -61,6 +61,12 @@ void uart_init() {
     //SET baudrate to 9600
     UART->BAUDRATE = 0x00275000;
 
+    //Disable CTS
+    UART->PSELCTS = 0xFFFFFFFF;
+    
+    //Disable RTS
+    UART->PSELRTS = 0xFFFFFFFF;
+
     //Enable uart
     UART->ENABLE = 4;
 
@@ -86,4 +92,25 @@ void uart_send(char letter) {
     //Stop transmission
     UART->STOPTX = 1;
 
+}
+
+char uart_read(){
+    //Start recieving
+    UART->STARTRX = 1;
+
+    //Clear RXDRDY
+    UART->RXDRDY = 0;
+
+    //Read data
+    char data = UART->RXD;
+
+    if(data) {
+        return data;
+    }
+    else {
+        return '\0';
+    }
+
+    //Stop recieving
+    UART->STOPRX = 1;
 }
