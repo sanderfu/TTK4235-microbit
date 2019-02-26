@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include "accel.h"
 #include "twi.h"
-
+/*
 #define ACCEL_ADDR			____
 #define ACCEL_DATA_REG		____
 #define ACCEL_CTRL_REG_1	____
@@ -31,3 +31,4 @@ void accel_read_x_y_z(int * data_buffer){
 	data_buffer[1] = (int)y_accel;
 	data_buffer[2] = (int)z_accel;
 }
+*/

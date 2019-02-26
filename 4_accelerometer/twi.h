@@ -1,6 +1,10 @@
-
+#ifndef TWI_H
+#define TWI_H
+#include <stdint.h>
 
 void twi_init();
+
+void twi_multi_read(uint8_t slave_addresss, uint8_t start_register, int registers_to_read, uint8_t* data_buffer);
 
 #define TWIO ((NRF_TWI_REG*)0x40003000)
 
@@ -35,20 +39,18 @@ typedef struct {
     volatile uint32_t INTENCLR;
     volatile uint32_t RESERVED9[110];
     volatile uint32_t ERRORSRC;
-    volatile uint32_t RESERVED9[14];
+    volatile uint32_t RESERVED10[14];
     volatile uint32_t ENABLE;
-    volatile uint32_t RESERVED10;
+    volatile uint32_t RESERVED11;
     volatile uint32_t PSELSCL;
     volatile uint32_t PSELSDA;
-    volatile uint32_t RESERVED11[2];
+    volatile uint32_t RESERVED12[2];
     volatile uint32_t RXD;
     volatile uint32_t TXD;
-    volatile uint32_t RESERVED12;
+    volatile uint32_t RESERVED13;
     volatile uint32_t FREQUENCY;
-    volatile uint32_t RESERVED13[24];
+    volatile uint32_t RESERVED14[24];
     volatile uint32_t ADDRESS;
-
-
-
-
 } NRF_TWI_REG;
+
+#endif
