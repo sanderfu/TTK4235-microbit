@@ -33,14 +33,33 @@ void GPIOTE_init() {
     GPIOTE->CONFIG[3] |= (0b11 << 16); //Set pin 15 to toggle
     GPIOTE->CONFIG[3] |= (1 << 20); //Set init value
 
+
+}
+
+void PPI_init() {
+    //Enable channels 0,1,2
+    PPI->CHEN |= 0b111;
+
+    //Set channel endpoints
+    PPI->PPI_CH[0].EEP = (uint32_t)&(GPIOTE->IN[0]);
+    PPI->PPI_CH[0].TEP = (uint32_t)&(GPIOTE->OUT[1]);
+
+    PPI->PPI_CH[1].EEP = (uint32_t)&(GPIOTE->IN[0]);
+    PPI->PPI_CH[1].TEP = (uint32_t)&(GPIOTE->OUT[2]);
+
+    PPI->PPI_CH[2].EEP = (uint32_t)&(GPIOTE->IN[0]);
+    PPI->PPI_CH[2].TEP = (uint32_t)&(GPIOTE->OUT[3]);
+    
 }
 
 int main() {
 
     GPIOTE_init();
 
+    PPI_init();
+
     while(1){
-        
+
     }
 
 
