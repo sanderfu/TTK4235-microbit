@@ -13,5 +13,9 @@ int main(){
 	err_code = bluetooth_init();
 	ubit_uart_print("BLE Enable error code: %d\n\r", err_code);
 
+	bluetooth_gap_advertise_start();
+	
+	
+
 	return 0;
 }

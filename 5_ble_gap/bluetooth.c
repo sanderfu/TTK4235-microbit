@@ -28,17 +28,30 @@ uint32_t bluetooth_init(){
 
 uint32_t bluetooth_gap_advertise_start(){
 	uint32_t err_code = 0;
-
+	//Why does short_local_name make it N/A in the APP?
 	static uint8_t adv_data[] = {
-		// Add some stuff
+		29, BLE_GAP_AD_TYPE_COMPLETE_LOCAL_NAME,
+		'B','e','d','r','e',' ','e','n','n',' ','T', 'o', 'r', 's', 't', 'e', 'i', 'n', ' ', 'o', 'g', ' ', 'H', 'e', 'n', 'r', 'i', 'k',
+		//3, BLE_GAP_AD_TYPE_16BIT_SERVICE_UUID_COMPLETE,
+		//0x0D, 0xF0//,
+		//2, BLE_GAP_AD_TYPE_SHORT_LOCAL_NAME,
+		//'8'
 	};
-	uint8_t adv_data_length = 0;
+	uint8_t adv_data_length = 30;
 
 	// Add more stuff
+	sd_ble_gap_adv_data_set(adv_data, adv_data_length, NULL, 0);
+	
+	ble_gap_adv_params_t adv_params;
+	memset(&adv_params, 0, sizeof(adv_params));
+	adv_params.type = BLE_GAP_ADV_TYPE_ADV_IND;
+	adv_params.interval = BLE_GAP_ADV_INTERVAL_MIN;
+
+	sd_ble_gap_adv_start(&adv_params);
 
 	// Remove these lines when doing the GAP exercise
-	(void)adv_data;
-	(void)adv_data_length;
+	//(void)adv_data;
+	//(void)adv_data_length;
 
 	return err_code;
 }
