@@ -1,10 +1,10 @@
 #include <stdint.h>
 #include "accel.h"
 #include "twi.h"
-/*
-#define ACCEL_ADDR			____
-#define ACCEL_DATA_REG		____
-#define ACCEL_CTRL_REG_1	____
+
+#define ACCEL_ADDR			0b0011001
+#define ACCEL_DATA_REG		0b10101000
+#define ACCEL_CTRL_REG_1	0b0100000
 #define ACCEL_200_HZ_ON		0x11
 
 void accel_init(){
@@ -31,4 +31,3 @@ void accel_read_x_y_z(int * data_buffer){
 	data_buffer[1] = (int)y_accel;
 	data_buffer[2] = (int)z_accel;
 }
-*/
