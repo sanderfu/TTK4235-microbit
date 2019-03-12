@@ -5,6 +5,8 @@
 #include "utility.h"
 #include "gpio.h"
 #include "uart.h"
+#include "ubit_led_matrix.h"
+
 
 int main(){
 
@@ -22,6 +24,7 @@ int main(){
     
     accel_init();
     
+    ubit_led_matrix_init();
 
     int sleep = 0;
 
@@ -33,21 +36,24 @@ int main(){
 
         accel_read_x_y_z(accel_buffer);
         
-
-        for (int i = 0; i < 3; i++) {
+        int i;
+        for (i = 0; i < 3; i++) {
             uart_send('X'+i);
-            utility_print(&uart_send, ": %d\t", accel_buffer[i]);
+            utility_print(&uart_send, ": %d ", accel_buffer[i]);
             //utility_print(&uart_send, "%d", accel_buffer[i]);
             
         }
         uart_send('\n');
         
-        sleep = 10000;
+
+        do_awesome_led_stuff(accel_buffer);
+
+        sleep = 100000;
         while (--sleep);
 
     }
 
-
+    
 
     free(data_buffer);
 

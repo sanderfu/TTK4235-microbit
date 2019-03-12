@@ -6,7 +6,8 @@ static void ubit_led_matrix_helper_disable_all_pins();
 static void ubit_led_matrix_helper_translate_x_y_to_ground_supply(int * data);
 
 void ubit_led_matrix_init(){
-	for(int i = 4; i <= 15; i++){
+	int i;
+	for(i = 4; i <= 15; i++){
 		GPIO->DIRSET = (1 << i);
 		GPIO->OUTCLR = (1 << i);
 	}
@@ -177,4 +178,13 @@ static void ubit_led_matrix_helper_translate_x_y_to_ground_supply(int * data){
 	}
 	data[0] = ground;
 	data[1] = supply;
+}
+
+
+void do_awesome_led_stuff(int* data_buffer) {
+	int x_accel = data_buffer[0];
+	int y_accel = data_buffer[1];
+	int x_dot = x_accel / 150;
+	int y_dot = - y_accel / 150;
+	ubit_led_matrix_light_only_at(x_dot, y_dot);
 }

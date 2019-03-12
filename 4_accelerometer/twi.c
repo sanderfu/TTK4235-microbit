@@ -48,7 +48,8 @@ void twi_multi_read(uint8_t slave_address, uint8_t start_register, int registers
     
     TWIO->TXDSENT = 0;
     
-    for (int i = 0; i < 10; i++) {
+    int i;
+    for (i = 0; i < 10; i++) {
         __asm("nop");
     }
 
@@ -58,12 +59,12 @@ void twi_multi_read(uint8_t slave_address, uint8_t start_register, int registers
     
 
     //Wait for data to be received and read continuously
-    for (int i = 0; i < registers_to_read-1; i++) {
+    for (i = 0; i < registers_to_read-1; i++) {
         
         while (!(TWIO->RXDREADY)) {
                 //Wait..
                
-            }
+        }
         data_buffer[i] = TWIO->RXD;
         TWIO->RXDREADY = 0;
     }
@@ -96,7 +97,8 @@ void twi_multi_write(uint8_t slave_address, uint8_t start_register, int register
     }
 
     //Send registers_to_write to bus
-    for (int i = 0; i < registers_to_write; i++) {
+    int i;
+    for (i = 0; i < registers_to_write; i++) {
         //Set TCDSENT to 0 again
         TWIO->TXDSENT = 0;
 
